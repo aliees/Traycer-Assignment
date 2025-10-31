@@ -1,0 +1,195 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+.App-header {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.App-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #1a73e8;
+}
+
+.App-header p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  color: #5f6368;
+}
+
+.App-main {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  height: 70vh;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 10px 15px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #1a73e8;
+  color: #fff;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.assistant {
+  background-color: #e9e9eb;
+  color: #333;
+  align-self: flex-start;
+}
+
+.chat-input {
+  display: flex;
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #1a73e8;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.chat-input button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.chat-input button:hover:not(:disabled) {
+  background-color: #1558b3;
+}
+
+.plan {
+  margin-top: 10px;
+}
+
+.plan-step {
+  margin-bottom: 15px;
+}
+
+.plan-step-header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.plan-step-header input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.plan-step-details {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.detail {
+  margin-bottom: 10px;
+}
+
+.detail-command pre,
+.detail-file pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.detail-file strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.confirmation {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f0f8ff;
+  border: 1px solid #b6d4fe;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.confirmation button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #1a73e8;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.generated-code {
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+.generated-code h4 {
+  margin-bottom: 5px;
+}
+
+.generated-code .file {
+  margin-bottom: 10px;
+}
+
+.generated-code .file strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.generated-code .file pre {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 5px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
