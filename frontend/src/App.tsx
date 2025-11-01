@@ -23,9 +23,11 @@ interface PlanStep {
 const ChatMessage = ({
   message,
   onGenerateCode,
+  onRefinePlan,
 }: {
   message: Message;
   onGenerateCode: (plan: PlanStep[]) => void;
+  onRefinePlan: () => void;
 }) => {
   if (typeof message.content === "string") {
     return <div className={`message ${message.role}`}>{message.content}</div>;
@@ -90,6 +92,9 @@ const ChatMessage = ({
               <button onClick={() => onGenerateCode(message.content.plan)}>
                 Generate Code
               </button>
+              <button onClick={onRefinePlan} className="secondary">
+                Refine Plan
+              </button>
             </div>
           )}
       </div>
@@ -109,7 +114,9 @@ function App() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isRefining, setIsRefining] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -128,6 +135,7 @@ function App() {
     setMessages(newMessages);
     setInput("");
     setLoading(true);
+    setIsRefining(false);
 
     const messagesForApi = newMessages.map((msg) => {
       if (typeof msg.content === "object") {
@@ -161,6 +169,11 @@ function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRefinePlan = () => {
+    setIsRefining(true);
+    inputRef.current?.focus();
   };
 
   const handleGenerateCode = async (plan: PlanStep[]) => {
@@ -213,7 +226,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Traycer</h1>
-        <p>Your AI-powered planning assistant</p>
+        <p>
+          An AI-powered coding assistant that plans, implements and executes
+        </p>
       </header>
       <main className="App-main">
         <div className="chat-window">
@@ -223,16 +238,22 @@ function App() {
                 key={index}
                 message={msg}
                 onGenerateCode={handleGenerateCode}
+                onRefinePlan={handleRefinePlan}
               />
             ))}
             <div ref={messagesEndRef} />
           </div>
           <form onSubmit={handleSubmit} className="chat-input">
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
+              placeholder={
+                isRefining
+                  ? "Describe the changes you'd like to make to the plan..."
+                  : "Type your message..."
+              }
               disabled={loading}
             />
             <button type="submit" disabled={loading}>
